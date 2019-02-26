@@ -1,0 +1,17 @@
+{
+  "name": "markdown-it-import",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Fabio Anselmo <fabio.a.anselmo@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "markdown-it": "^8.4.2",
+    "markdown-it-prism": "^2.0.1"
+  }
+}
