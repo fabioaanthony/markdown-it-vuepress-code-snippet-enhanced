@@ -1,12 +1,17 @@
 {
   "name": "markdown-it-vuepress-code-snippet-enhanced",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Easily import code snippets for Vuepress",
   "main": "index.js",
   "scripts": {
     "dev": "node index.js"
   },
-  "keywords": ["markdown-it", "vuepress", "vue", "markdown"],
+  "keywords": [
+    "markdown-it",
+    "vuepress",
+    "vue",
+    "markdown"
+  ],
   "author": "Fabio Anselmo <fabio.a.anselmo@gmail.com>",
   "license": "MIT",
   "devDependencies": {
