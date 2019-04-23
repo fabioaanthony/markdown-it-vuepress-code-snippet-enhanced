@@ -57,13 +57,13 @@ _Vuepress uses prismjs, so for proper syntax highlighting check prism.js docs._
 You can transclude a single or multiple parts of a file using `transclude`, `transcludeWith`, or `transcludeTag`.
 
 #### transcludeWith
-For transcluding one or more parts of a file using comment lines and specify a unique pattern.
+For transcluding one or **more** parts of a file, specify a unique pattern.
 ```md
 @[code lang=ruby transcludeWith=|_|_|](@/docs/code.rb)
 @[code transcludeWith=:::](@/docs/code.js)
 @[code transcludeWith=++++](@/docs/code.h)
 ```
-##### Example
+##### Example 1
 ```rb
 require 'lib'  
 require 'other'  
@@ -72,6 +72,27 @@ require 'other'
 def hello
   puts 'hello'
   puts 'vue'
+end
+# |_|_|
+```
+
+##### Example 2 (Illustrating multiple transclusions in the same file)
+```rb
+require 'lib'  
+require 'other'  
+
+# |_|_|
+def hello
+  puts 'hello'
+  puts 'vue'
+end
+# |_|_|
+
+   ... more code ...
+
+# |_|_|
+def goodebye
+  puts 'bye...'
 end
 # |_|_|
 ```
