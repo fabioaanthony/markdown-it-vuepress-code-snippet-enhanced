@@ -30,6 +30,16 @@ markdown: {
 }
 ```
 
+In Vuepress 1.x `config.js` add the following: 
+
+```js
+markdown: {
+    extendMarkdown: md => {
+        md.use(require('markdown-it-vuepress-code-snippet-enhanced'))
+    }
+}
+```
+
 You can now import code snippets into your markdown files with the following syntax:
 
 ```md
