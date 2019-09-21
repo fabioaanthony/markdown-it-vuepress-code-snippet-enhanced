@@ -66,6 +66,19 @@ module.exports = function (md, options) {
   }, transcludeType) => {
     const lines = content.split('\n')
     let _content = ''
+    let _block = []
+
+    const pushBlock = () => {
+      let indent = -1
+      _block.forEach(line => {
+        if (line !== '') {
+          const lineIndent = line.match(/^\s*/)[0].length
+          indent = indent < 0 ? lineIndent : Math.min(indent, lineIndent)
+        }
+      })
+      _content += _block.map(line => line.substring(indent)).join("\n") + "\n"
+      _block = []
+    }
 
     if (transcludeType === TRANSCLUDE_LINE) {
       const [tStart, tEnd] = options.transclude.replace(/[^\d|-]/g, '').split('-')
@@ -73,9 +86,10 @@ module.exports = function (md, options) {
       lines.forEach((line, idx) => {
         const i = idx + 1
         if (i >= tStart && i <= tEnd) {
-          _content += line + '\n'
+          _block.push(line)
         }
       })
+      pushBlock()
     } else if (transcludeType === TRANSCLUDE_TAG) {
       const t = options.transcludeTag
       const tag = new RegExp(`${t}>$|^<${t}`)
@@ -85,12 +99,13 @@ module.exports = function (md, options) {
         const line = lines[i]
 
         if (matched && tag.test(line)) {
-          _content += line + '\n'
+          _block.push(line)
+          pushBlock()
           break
         } else if (matched) {
-          _content += line + '\n'
+          _block.push(line)
         } else if (tag.test(line)) {
-          _content += line + '\n'
+          _block.push(line)
           matched = true
         }
       }
@@ -103,12 +118,15 @@ module.exports = function (md, options) {
         const line = lines[i]
 
         if (tag.test(line)) {
+          if (matched) {
+            pushBlock()
+          }
           matched = !matched
           continue
         }
 
         if (matched) {
-          _content += line + '\n'
+          _block.push(line)
         }
       }
     }
