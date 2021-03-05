@@ -20,13 +20,15 @@ npm i -D markdown-it-vuepress-code-snippet-enhanced
 
 ## Setup
 
-In Vuepress `config.js` add the following: 
+In Vuepress `config.js` add the following:
 
 ```js
-markdown: {
-    config: md => {
+module.exports = {
+  markdown: {
+    extendMarkdown: md => {
         md.use(require('markdown-it-vuepress-code-snippet-enhanced'))
     }
+  }
 }
 ```
 
@@ -75,8 +77,8 @@ For transcluding one or **more** parts of a file, specify a unique pattern.
 ```
 ##### Example 1
 ```rb
-require 'lib'  
-require 'other'  
+require 'lib'
+require 'other'
 
 # |_|_|
 def hello
@@ -88,8 +90,8 @@ end
 
 ##### Example 2 (Illustrating multiple transclusions in the same file)
 ```rb
-require 'lib'  
-require 'other'  
+require 'lib'
+require 'other'
 
 # |_|_|
 def hello
@@ -129,7 +131,7 @@ Use a range indicating the `start` and `end` lines. This option is inclusive.
 @[code highlight={1-6} transcludeTag=style](@/docs/code.vue)
 ```
 
-### Source File 
+### Source File
 ```html
 <template>
   <div class="component"></div>
